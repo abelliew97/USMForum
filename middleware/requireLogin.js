@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
   if (!authorization) {
     res.statues(401).json({ error: "Please Login" });
   }
-  const token = authorization;
+  const token = authorization.replace("Bearer ", "");
   jwt.verify(token, JWT_SECRET, (err, payload) => {
     if (err) {
       return res.status(401).json({ error: "you must be logged in" });
